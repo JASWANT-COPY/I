@@ -19,14 +19,21 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const { batchid, topicid, full, date } = req.query;
+    const { batchId } = req.query;
+    const { topicid, full, date } = req.query;
     
-    let url = `${BASE_URL}/batch`;
+    if (!batchId) {
+      return res.status(400).json({
+        error: true,
+        message: 'Batch ID is required'
+      });
+    }
+    
+    let url = `${BASE_URL}/batch/${batchId}`;
     
     // Query parameters construct करें
     const params = new URLSearchParams();
     
-    if (batchid) params.append('batchid', batchid);
     if (topicid) params.append('topicid', topicid);
     if (full) params.append('full', full);
     if (date) params.append('date', date);
@@ -52,21 +59,18 @@ module.exports = async (req, res) => {
     console.error('API Error:', error.message);
     
     if (error.response) {
-      // Original API से error आया है
       res.status(error.response.status).json({
         error: true,
         message: error.response.data || 'Error fetching data',
         status: error.response.status
       });
     } else if (error.request) {
-      // Request timeout या network error
       res.status(500).json({
         error: true,
         message: 'Network error or timeout',
         details: error.message
       });
     } else {
-      // अन्य error
       res.status(500).json({
         error: true,
         message: 'Internal server error',
