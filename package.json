@@ -1,7 +1,7 @@
 {
   "name": "cw-api-proxy",
   "version": "1.0.0",
-  "description": "API Proxy for cw-api-website",
+  "description": "API Proxy for cw-api-website with CORS support",
   "scripts": {
     "dev": "vercel dev"
   },
