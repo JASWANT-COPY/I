@@ -1,14 +1,7 @@
 {
-  "name": "cw-api-proxy",
+  "name": "selection-way-proxy",
   "version": "1.0.0",
-  "description": "API Proxy for cw-api-website with CORS support",
   "scripts": {
     "dev": "vercel dev"
-  },
-  "dependencies": {
-    "axios": "^1.6.0"
-  },
-  "engines": {
-    "node": ">=20.0.0"
   }
 }
